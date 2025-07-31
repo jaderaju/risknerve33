@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { jwtDecode } from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode'; // <--- CHANGED THIS LINE
 import axios from 'axios';
 
 export const AuthContext = createContext();
@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
   // Function to save token and user info
   const login = (token) => {
     localStorage.setItem('token', token);
-    const decodedUser = jwt_decode(token);
+    const decodedUser = jwtDecode(token); // <--- CHANGED THIS LINE
     setUser(decodedUser);
     setIsAuthenticated(true);
     // Set axios default header for all subsequent requests
@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }) => {
     const token = localStorage.getItem('token');
     if (token) {
       try {
-        const decodedUser = jwt_decode(token);
+        const decodedUser = jwtDecode(token); // <--- CHANGED THIS LINE
         // Check if token is expired
         if (decodedUser.exp * 1000 < Date.now()) {
           logout(); // Token expired
