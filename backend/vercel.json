@@ -1,0 +1,13 @@
+{
+  "functions": {
+    "server.js": {
+      "runtime": "nodejs18.x" // Or your Node.js version, e.g., nodejs20.x
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/server.js"
+    }
+  ]
+}
