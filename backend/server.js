@@ -5,9 +5,10 @@ const cors = require('cors');
 const connectDB = require('./config/db');
 const { errorHandler } = require('./middleware/errorMiddleware');
 
-// Import routes (add userRoutes here)
+// Import routes
 const authRoutes = require('./routes/authRoutes');
-const userRoutes = require('./routes/userRoutes'); // <-- ADD THIS LINE
+const userRoutes = require('./routes/userRoutes');
+const assetRoutes = require('./routes/assetRoutes'); // <-- ADD THIS LINE
 // const auditRoutes = require('./routes/auditRoutes');
 // const controlRoutes = require('./routes/controlRoutes');
 // ... etc. for all modules
@@ -27,7 +28,8 @@ app.use(cors());
 
 // Define basic routes
 app.use('/api/auth', authRoutes);
-app.use('/api/users', userRoutes); // <-- ADD THIS LINE
+app.use('/api/users', userRoutes);
+app.use('/api/assets', assetRoutes); // <-- ADD THIS LINE
 // app.use('/api/audits', auditRoutes);
 // app.use('/api/controls', controlRoutes);
 // ... add more routes as you create them
