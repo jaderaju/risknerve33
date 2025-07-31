@@ -169,11 +169,8 @@ function AssetsPage() {
             </div>
             <div className="form-group">
               <label htmlFor="owner">Owner:</label>
-              {/* This could be a dropdown populated by a call to your /api/users endpoint */}
-              {/* For now, assuming you type user ID or integrate a UsersList component */}
-              <input type="text" id="owner" value={owner} onChange={(e) => setOwner(e.target.value)} placeholder="Enter Owner User ID" required />
-              {/* Example if you have a UserList component to select from */}
-              {/* <UsersList onSelectUser={(selectedUser) => setOwner(selectedUser._id)} currentSelectedUserId={owner} /> */}
+              {/* This is the updated part, using the UsersList component */}
+              <UsersList onSelectUser={(selectedUser) => setOwner(selectedUser ? selectedUser._id : '')} currentSelectedUserId={owner} />
             </div>
             <div className="form-group">
               <label htmlFor="location">Location:</label>
