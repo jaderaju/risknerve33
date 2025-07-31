@@ -8,12 +8,13 @@ const { errorHandler } = require('./middleware/errorMiddleware');
 // Import routes
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
-const assetRoutes = require('./routes/assetRoutes'); // <-- ADD THIS LINE
+const assetRoutes = require('./routes/assetRoutes'); 
 const riskRoutes = require('./routes/riskRoutes'); 
 const controlRoutes = require('./routes/controlRoutes');
 const frameworkRoutes = require('./routes/frameworkRoutes');
 const policyRoutes = require('./routes/policyRoutes');
 const evidenceRoutes = require('./routes/evidenceRoutes'); 
+const auditRoutes = require('./routes/auditRoutes');
 
 const port = process.env.PORT || 5000;
 
