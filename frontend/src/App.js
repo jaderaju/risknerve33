@@ -4,9 +4,9 @@ import { AuthContext } from './AuthContext';
 import HomePage from './pages/HomePage';
 import LoginForm from './components/LoginForm';
 import RegisterForm from './components/RegisterForm';
+import AssetsPage from './pages/AssetsPage'; // <-- UNCOMMENT OR ADD THIS LINE
 
 // Import pages for other modules (will be created later)
-// import AssetsPage from './pages/AssetsPage';
 // import RisksPage from './pages/RisksPage';
 // import ControlsPage from './pages/ControlsPage';
 // import FrameworksPage from './pages/FrameworksPage';
@@ -45,7 +45,7 @@ function App() {
           {isAuthenticated ? (
             <>
               <span>Welcome, {user.username} ({user.role})</span>
-              <Link to="/assets">Assets</Link>
+              <Link to="/assets">Assets</Link> {/* <-- UNCOMMENT OR ADD THIS LINE */}
               <Link to="/risks">Risks</Link>
               <Link to="/controls">Controls</Link>
               <Link to="/frameworks">Frameworks</Link>
@@ -73,7 +73,7 @@ function App() {
           <Route path="/unauthorized" element={<div><h1>403 - Unauthorized Access</h1><p>You do not have permission to view this page.</p></div>} />
 
           {/* Protected Routes - Examples */}
-          {/* <Route
+          <Route // <-- UNCOMMENT OR ADD THIS BLOCK
             path="/assets"
             element={
               <PrivateRoute allowedRoles={['SuperAdmin', 'ITManager', 'SecurityOfficer', 'Employee']}>
@@ -81,7 +81,7 @@ function App() {
               </PrivateRoute>
             }
           />
-          <Route
+          {/* <Route
             path="/risks"
             element={
               <PrivateRoute allowedRoles={['SuperAdmin', 'RiskManager', 'ComplianceOfficer', 'AuditManager']}>
