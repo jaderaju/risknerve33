@@ -12,6 +12,7 @@ const assetRoutes = require('./routes/assetRoutes'); // <-- ADD THIS LINE
 const riskRoutes = require('./routes/riskRoutes'); 
 const controlRoutes = require('./routes/controlRoutes');
 const frameworkRoutes = require('./routes/frameworkRoutes');
+const policyRoutes = require('./routes/policyRoutes');
 
 const port = process.env.PORT || 5000;
 
