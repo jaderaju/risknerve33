@@ -16,6 +16,7 @@ const policyRoutes = require('./routes/policyRoutes');
 const evidenceRoutes = require('./routes/evidenceRoutes'); 
 const auditRoutes = require('./routes/auditRoutes');
 const bcmRoutes = require('./routes/bcmRoutes');
+const cors = require('cors');
 
 const port = process.env.PORT || 5000;
 
