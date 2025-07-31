@@ -9,9 +9,7 @@ const { errorHandler } = require('./middleware/errorMiddleware');
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 const assetRoutes = require('./routes/assetRoutes'); // <-- ADD THIS LINE
-// const auditRoutes = require('./routes/auditRoutes');
-// const controlRoutes = require('./routes/controlRoutes');
-// ... etc. for all modules
+const riskRoutes = require('./routes/riskRoutes'); 
 
 const port = process.env.PORT || 5000;
 
