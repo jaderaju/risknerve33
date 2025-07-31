@@ -252,3 +252,126 @@ body.dark-theme .error-message {
   background-color: #721c24; /* Dark red background */
   border-color: #f5c6cb;
 }
+
+/* General Table Styles */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+  border-radius: 8px;
+  overflow: hidden; /* Ensures rounded corners apply to content */
+}
+
+.data-table thead tr {
+  background-color: #007bff;
+  color: #ffffff;
+  text-align: left;
+}
+
+.data-table th,
+.data-table td {
+  padding: 12px 15px;
+  border: 1px solid #dee2e6;
+}
+
+.data-table tbody tr:nth-of-type(even) {
+  background-color: #f8f9fa;
+}
+
+.data-table tbody tr:hover {
+  background-color: #e2f2ff;
+}
+
+/* Actions column for tables */
+.data-table .actions {
+  white-space: nowrap; /* Prevent buttons from wrapping */
+}
+
+.data-table .actions button {
+  margin-right: 8px;
+  padding: 6px 10px;
+  font-size: 0.85em;
+  border-radius: 4px;
+  width: auto; /* Override 100% width from general button style */
+}
+
+/* Specific button styles */
+.btn {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  margin-right: 10px; /* Spacing between buttons */
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+.btn-edit {
+  background-color: #ffc107; /* Warning yellow */
+  color: #343a40;
+}
+
+.btn-edit:hover {
+  background-color: #e0a800;
+}
+
+.btn-delete {
+  background-color: #dc3545; /* Danger red */
+  color: white;
+}
+
+.btn-delete:hover {
+  background-color: #c82333;
+}
+
+/* Form card for add/edit forms */
+.form-card {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 25px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  border-left: 5px solid #007bff; /* Accent border */
+}
+
+.form-card h2 {
+  text-align: center;
+  color: #007bff;
+  margin-bottom: 25px;
+}
+
+.form-card button {
+  margin-top: 15px;
+  margin-right: 10px;
+  width: auto; /* Adjust button width within form card */
+}
+
+/* Page container for overall padding and layout */
+.page-container {
+  padding: 20px;
+}
+
+/* Error message styling for specific pages */
+.page-container .error-message {
+    margin-top: 20px;
+}
