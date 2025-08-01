@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 console.log('MONGO_URI at startup:', process.env.MONGO_URI); // <--- Add this line!
-
+console.log('DEBUG_MONGO_URI:', process.env.DEBUG_MONGO_URI);
 let conn = null;
 
 const connectDB = async () => {
