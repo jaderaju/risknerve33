@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, Navigate } from 'react-router-dom';
 import { AuthContext } from './AuthContext';
-import authApi from './api//authApi'; // <-- This is the missing line
+import authApi from './api/authApi'; // <-- This is the missing line
 
 import HomePage from './pages/HomePage';
 import LoginForm from './components/LoginForm';
