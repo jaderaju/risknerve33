@@ -5,35 +5,34 @@ const User = require('../models/User');
 const generateToken = require('../utils/generateToken');
 const { protect } = require('../middleware/authMiddleware'); // Import protect middleware
 
+// ✅ Test GET route for /api/auth (for browser testing)
+router.get('/', (req, res) => {
+  res.json({ message: 'Auth API is live!' });
+});
+
+// ...your existing register, login, and profile routes here...
+
 // @desc    Register new user
-// @route   POST /api/auth/register
-// @access  Public
 router.post(
   '/register',
   asyncHandler(async (req, res) => {
     const { username, email, password, role, department } = req.body;
-
     if (!username || !email || !password) {
       res.status(400);
       throw new Error('Please enter all required fields: username, email, password');
     }
-
-    // Check if user already exists
     const userExists = await User.findOne({ email });
     if (userExists) {
       res.status(400);
       throw new Error('User with this email already exists');
     }
-
-    // Create user
     const user = await User.create({
       username,
       email,
       password,
-      role: role || 'Employee', // Default to 'Employee' if no role is provided
+      role: role || 'Employee',
       department,
     });
-
     if (user) {
       res.status(201).json({
         _id: user._id,
@@ -51,21 +50,14 @@ router.post(
 );
 
 // @desc    Authenticate a user (login)
-// @route   POST /api/auth/login
-// @access  Public
 router.post(
   '/login',
   asyncHandler(async (req, res) => {
     const { email, password } = req.body;
-
-    // Check for user email
     const user = await User.findOne({ email });
-
     if (user && (await user.matchPassword(password))) {
-      // Update lastLogin timestamp
       user.lastLogin = new Date();
       await user.save();
-
       res.json({
         _id: user._id,
         username: user.username,
@@ -82,13 +74,10 @@ router.post(
 );
 
 // @desc    Get user profile (protected route for the logged-in user)
-// @route   GET /api/auth/profile
-// @access  Private
 router.get(
   '/profile',
-  protect, // This route is protected
+  protect,
   asyncHandler(async (req, res) => {
-    // req.user is available here from the protect middleware
     res.json({
       _id: req.user._id,
       username: req.user.username,
