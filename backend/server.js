@@ -1,10 +1,12 @@
+// backend/server.js
+
 const express = require('express');
 const dotenv = require('dotenv').config();
 const cors = require('cors');
 const connectDB = require('./config/db');
 const { errorHandler } = require('./middleware/errorMiddleware');
 
-// 1. Connect to MongoDB (safe for serverless)
+// 1. Connect to MongoDB (safe for Vercel/serverless)
 connectDB();
 
 const app = express();
@@ -13,33 +15,35 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// 3. CORS configuration (allows local + deployed frontends)
+// 3. CORS configuration (supports local dev and production frontend)
+const allowedOrigins = [
+  'http://localhost:3000',               // Local React
+  process.env.CORS_ORIGIN                // Deployed React, e.g. https://your-frontend.vercel.app
+].filter(Boolean);                       // Filter out undefined
+
 const corsOptions = {
-    origin: function (origin, callback) {
-        const allowedOrigins = [
-            'http://localhost:3000',
-            process.env.CORS_ORIGIN
-        ].filter(Boolean); // filter out undefined
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like curl/Postman) or allowedOrigins
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
 };
 
 app.use(cors(corsOptions));
-app.options('*', cors(corsOptions)); // Handle preflight OPTIONS requests
+app.options('*', cors(corsOptions)); // Handle preflight requests
 
-// 4. Health check route (for Vercel/serverless debugging)
+// 4. Health check route
 app.get('/api/health', (req, res) => {
-    res.status(200).json({ status: 'ok', env: process.env.NODE_ENV });
+  res.status(200).json({ status: 'ok', env: process.env.NODE_ENV });
 });
 
-// 5. Mount API routes (make sure all routes exist)
+// 5. Mount API routes (ensure all files exist)
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/users', require('./routes/userRoutes'));
 app.use('/api/assets', require('./routes/assetRoutes'));
@@ -53,7 +57,7 @@ app.use('/api/bcm', require('./routes/bcmRoutes'));
 
 // 6. Root route (friendly message)
 app.get('/', (req, res) => {
-    res.status(200).json({ message: 'Welcome to the GRC Enterprise API!' });
+  res.status(200).json({ message: 'Welcome to the GRC Enterprise API!' });
 });
 
 // 7. Error handling middleware (should always be last)
