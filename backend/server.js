@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: false }));
 // 3. CORS configuration (hardcoded for local and production frontend)
 const allowedOrigins = [
   'http://localhost:3000',                // Local React dev
-  'https://risknerve33.vercel.app'        // Production frontend (replace with your exact frontend URL if different)
+  'https://risknerve33-frontend.vercel.app'        // Production frontend (replace with your exact frontend URL if different)
 ];
 
 const corsOptions = {
