@@ -6,7 +6,7 @@ const cors = require('cors');
 const connectDB = require('./config/db');
 const { errorHandler } = require('./middleware/errorMiddleware');
 
-// 1. Connect to MongoDB (safe for Vercel/serverless)
+// 1. Connect to MongoDB
 connectDB();
 
 const app = express();
@@ -63,5 +63,8 @@ app.get('/', (req, res) => {
 // 7. Error handling middleware (should always be last)
 app.use(errorHandler);
 
-// 8. Export the app for Vercel (DO NOT use app.listen())
-module.exports = app;
+// 8. Start server (REQUIRED for Render/Railway/Heroku)
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
