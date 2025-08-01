@@ -15,15 +15,15 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// 3. CORS configuration (supports local dev and production frontend)
+// 3. CORS configuration (hardcoded for local and production frontend)
 const allowedOrigins = [
-  'http://localhost:3000',               // Local React dev
-  process.env.CORS_ORIGIN                // Production frontend, set in Render env as e.g. https://risknerve33.vercel.app
-].filter(Boolean);                       // Removes undefined if not set
+  'http://localhost:3000',                // Local React dev
+  'https://risknerve33.vercel.app'        // Production frontend (replace with your exact frontend URL if different)
+];
 
 const corsOptions = {
   origin: function (origin, callback) {
-    // Allow requests with no origin (like curl/Postman) or allowedOrigins
+    // Allow requests with no origin (like curl/Postman) or from allowedOrigins
     if (!origin) return callback(null, true);
     if (allowedOrigins.includes(origin)) {
       return callback(null, true);
