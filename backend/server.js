@@ -17,26 +17,29 @@ app.use(express.urlencoded({ extended: false }));
 
 // 3. CORS configuration (supports local dev and production frontend)
 const allowedOrigins = [
-  'http://localhost:3000',               // Local React
-  process.env.CORS_ORIGIN                // Deployed React, e.g. https://your-frontend.vercel.app
-].filter(Boolean);                       // Filter out undefined
+  'http://localhost:3000',               // Local React dev
+  process.env.CORS_ORIGIN                // Production frontend, set in Render env as e.g. https://risknerve33.vercel.app
+].filter(Boolean);                       // Removes undefined if not set
 
 const corsOptions = {
   origin: function (origin, callback) {
     // Allow requests with no origin (like curl/Postman) or allowedOrigins
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
     }
+    console.log('CORS BLOCK:', origin); // For debugging
+    return callback(new Error('Not allowed by CORS'), false);
   },
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true
+  credentials: true,
+  optionsSuccessStatus: 200 // For legacy browser support
 };
 
+// CORS middleware must be above all routes!
 app.use(cors(corsOptions));
-app.options('*', cors(corsOptions)); // Handle preflight requests
+app.options('*', cors(corsOptions)); // Preflight all routes
 
 // 4. Health check route
 app.get('/api/health', (req, res) => {
